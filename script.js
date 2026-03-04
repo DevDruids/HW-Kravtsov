@@ -1,100 +1,107 @@
-function Player(name, power, defence, hp, type='ai') {
-    this.name = name;
-    this.power = power;
-    this.defence = defence;
-    this.hp = hp;
-    this.maxHp = hp;
-    this.type = type;
+// 1. Запишіть число 5 600 000 у вигляді з використанням e.
+// Запишіть число 0.000078 у вигляді з використанням e.
+// Обчисліть : 250e3 + 4e2
 
-    this.directionOfAttack = null;
-    this.directionOfDefence = null;
+const n1 = 5.6e6;
+const n2 = 78e-6;
+const sum = 250e3 + 4e2;
 
-    this.attack = function() {
+// 2. Різні системи числення
+// Перетворіть число 238:
+// у шістнадцятковій системі
+// у двійковій системі
+// у вісімковій системі
 
-        return this.power;
-    }
+const n3 = 238;
 
-    this.takeDamage = function(damage) {
-        this.hp -= damage;
+n3.toString(16);
+n3.toString(2);
+n3.toString(8);
+
+// 3. За допомогою parseInt перетворіть:
+// "111" з base 2
+// "ff" з base 16
+// "77" з base 8
+
+const s1 = "111";
+const s2 = "ff";
+const s3 = "77";
+
+parseInt(s1, 2);
+parseInt(s2, 16);
+parseInt(s3, 8);
+
+// 4. Напишіть приклад, де:
+// isNaN повертає true
+// Number.isNaN повертає false
+
+const s4 = "555";
+const s5 = "hello";
+
+const isTrue1 = isNaN(s4);
+const isTrue2 = isNaN(s5);
+
+// 5. Перетворіть у число:
+
+
+// "12px"
+// "100.5em"
+// "45.67.89"
+
+// Чому Number("12px") повертає інший результат, ніж parseInt("12px")?
+
+const s6 = "12px";
+const s7 = "100.5em";
+const s8 = "45.67.89";
+
+// console.log(Number(s6))
+// console.log(Number(s7))
+// console.log(Number(s8))
+
+parseInt(s6)
+parseInt(s7)
+parseInt(s8)
+
+
+// parseInt преобразовует в число до первого символа, не числа, а Number - целиком
+
+
+// 6. Округліть -3.4 за допомогою:
+// Math.floor
+// Math.ceil
+// Math.trunc
+// За допомогою toFixed(2) зробіть число 12.34567 з двома знаками після коми.
+
+const n4 = -3.4;
+const n5 = 12.34567;
+
+Math.floor(n4);
+Math.ceil(n4);
+Math.trunc(n4);
+n5.toFixed(2);
+
+
+
+// 7. Створіть програму-калькулятор конвертації:
+
+// Користувач вводить число.
+
+// Програма:
+// перевіряє, чи це коректне число
+// виводить його у двійковій системі
+// виводить його у шістнадцятковій системі
+// округлює до 2 знаків після коми
+// перевіряє, чи є число скінченним
+
+const inputNumber = 5e55;
+
+function calculatorConvertation(num){
+    if(!isNaN(num)){
+        console.log(`Двійкова - ${num.toString(2)}`)
+        console.log(`Шістнадцяткова - ${num.toString(16)}`)
+        console.log(`Округлене - ${num.toFixed(2)}`)
+        console.log(`Скінченне чи ні - ${isFinite(num)}`)
     }
 }
 
-const players = [
-    new Player('Player 1', 10, 13, 100, 'user'),
-    new Player('AI 01', 2, 13, 20, 'comp_lvl_01'),
-]
-
-const gameController = {
-    attackTurn: null,
-    defenceTurn: null,
-    playerCards: null,
-    playersHP: null,
-
-    resizeHealthBar() {
-        for (const i = 0; i <=1; i++) {
-            this.playersHP[i].style.width = `${players[i].hp / players[i].maxHp * 100}%`
-        }
-    },
-
-    addHTMLData() {
-        this.playerCards = document.querySelectorAll('.player-card');
-        this.playersHP = document.querySelectorAll('.hp-bar-inner');
-        for (let i = 0; i <=1; i++) {
-            const playerNameEl = this.playerCards[i].querySelector('.player-stats-item.name');
-            playerNameEl.innerText = players[i].name;
-
-            const playerPowerEl = this.playerCards[i].querySelector('.player-stats-item.power span');
-            playerPowerEl.innerText = players[i].power;
-
-            const playerDefenceEl = this.playerCards[i].querySelector('.player-stats-item.defence span');
-            playerDefenceEl.innerText = players[i].defence;
-
-            
-        }
-    },
-
-    start() {
-        this.addHTMLData();
-        this.resizeHealthBar();
-
-        this.attackTurn = Math.round(Math.random()); //визначаємо чий хід
-        this.defenceTurn = Math.abs(this.attackTurn - 1);
-
-        while (players[0].hp > 0 && players[1].hp > 0) {
-            // alert(`атакує гравець ${players[this.attackTurn].name}`)
-            // alert(`${players[this.attackTurn].name} наносить ${players[this.attackTurn].power} урона`);
-            // this.resizeHealthBar();
-            
-            players[this.defenceTurn].takeDamage(players[this.attackTurn].attack())
-            // this.showHealth();
-            this.changeTurn();
-        }
-        // this.showWinner();
-    }, 
-    changeTurn() {
-        this.attackTurn = this.defenceTurn;
-        this.defenceTurn = Math.abs(this.defenceTurn - 1);
-    },
-    showHealth() {
-        alert(`
-            здоров'я ${players[this.attackTurn].name}: ${players[this.attackTurn].hp}
-            здоров'я ${players[this.defenceTurn].name}: ${players[this.defenceTurn].hp}
-            `)
-    },
-    showWinner() {
-        if(players[0].hp <= 0) {
-            alert(`переміг гравець${players[1].name}`)
-        } else {
-            alert(`переміг гравець${players[0].name}`)
-        }
-    }
-}
-
-gameController.start();
-
-
-
-
-
-
-
+calculatorConvertation(inputNumber)
