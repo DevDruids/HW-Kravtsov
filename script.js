@@ -1,69 +1,106 @@
-// Не доделано
+const users = [
+  { name: "Ivan", age: 18 },
+  { name: "Anna", age: 25 },
+  { name: "Oleg", age: 30 },
+  { name: "Olena", age: 22 },
+  { name: "Dmytro", age: 27 }
+];
 
-const arra = [5, 4, 3, 2];
-const arr2 = [5, 4, 3, 2];
+const newUsers = [...users];
 
-function splicePoly(arr, start, deletedCount, item){
-  if(arr){
-    arr[start] = item;
+function randomUserFunc(newUsers){
+  if(newUsers.length === 0) return null;
 
-    newArr = [];
-    let temp = deletedCount - start
+  const randomIndex = Math.floor(Math.random() * newUsers.length);
+  const user = newUsers[randomIndex];
 
-    for(let i = 0; i < temp; i++){
-      newArr.push(arr[i]);
-    }
-  }
-  return newArr;
+  newUsers.splice(randomIndex, 1);
+
+  return user;
 }
 
-console.log(splicePoly(arra, 1, 3, "Burger"))
+// console.log(randomUserFunc(newUsers))
+// console.log(randomUserFunc(newUsers))
+// console.log(randomUserFunc(newUsers))
+// console.log(randomUserFunc(newUsers))
+// console.log(randomUserFunc(newUsers))
+// console.log(randomUserFunc(newUsers)) // null
 
-arr2.splice(1, 2, "Burger")
-console.log(arr2)
 
+// 2. sort()
+// відсортувати users по імені
 
+users.sort((a, b) => {
+  if(a.name > b.name) return 1
+  else if(a.name < b.name) return -1
+  else return 0;
+})
 
+// 3. split/join()
+// const str = "2026-03-18";
+// отримати 
+// 18.03.2026
 
-// Bubble sort
+const str = "2026-03-18";
 
-const arr3 = [4, 7, 1, 67, 48, 100, -2];
+str.split('-').reverse().join('.');
 
-function bubleSort(arr){
-  for(let i = 0; i < arr.length; i++){
-    for(let j = 0; j < arr.length - 1 - i; j++){
-      if(arr[j] > arr[j + 1]){
-        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
-      }
-    }
+// 4. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+// всі букви 'o' замініть на $$$
+
+const str1 = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s";
+
+const splitedStr = str1.split('');
+
+for(let i = 0; i < splitedStr.length; i++){
+  if(splitedStr[i] === 'o'){
+    splitedStr[i] = '$$$';
   }
-  return arr;
 }
 
+splitedStr.join('')
 
-const arrRofl = [2, 8, 1, 10, 5, 455];
 
-function quickSort(arr){
-  if(arr.length <= 1) return arr;
+// 5. reduce()
+// const numbers = [5, 10, 15, 20];
+// Обчислити суму непарних елементів
 
-  let pivot = arr[arr.length - 1];
+const numbers = [5, 10, 15, 20];
 
-  let left = [];
-  let right = [];
+const sum = numbers.reduce((acc, a) => a % 2 !== 0 ? acc + a : acc)
 
-  for(let i = 0; i < arr.length - 1; i++){
-    if(arr[i] < pivot){
-      left.push(arr[i]);
-    }else(
-      right.push(arr[i])
-    );
-  }
-  return [...quickSort(left), pivot, ...quickSort(right)];
-}
 
-const temp = [...arrRofl];
 
-console.log(...arrRofl)
-console.log(typeof temp) // Я не розумію як тип розгорнутого масиву об'єкт????? 
+// **6. reduce()
+// const users = [
+// { name: "Ivan", age: 18 },
+// { name: "Anna", age: 25 },
+// { name: "Oleg", age: 30 },
+// { name: "Olena", age: 22 },
+// { name: "Petro", age: 17 }
+// ];
 
-// console.log(quickSort(arrRofl))
+// редьюсом отримайте
+// {
+// adult: [
+//  { name: "Ivan", age: 18 },
+//  { name: "Anna", age: 25 },
+//  { name: "Oleg", age: 30 },
+//  { name: "Olena", age: 22 }
+// ],
+// minor: [
+//  { name: "Petro", age: 17 }
+// ]
+// }
+
+const users2 = [
+  { name: "Ivan", age: 18 },
+  { name: "Anna", age: 25 },
+  { name: "Oleg", age: 30 },
+  { name: "Olena", age: 22 },
+  { name: "Petro", age: 17 }
+];
+
+const usersSorted = users2.reduce((a, ) => {
+  if()
+})
