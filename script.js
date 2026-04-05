@@ -101,6 +101,13 @@ const users2 = [
   { name: "Petro", age: 17 }
 ];
 
-const usersSorted = users2.reduce((a, ) => {
-  if()
-})
+const usersSorted = users2.reduce((sum, user) => {
+  if(user.age < 18){
+    sum.minor.push(user);
+  }else{
+    sum.adult.push(user);
+  }
+  return sum;
+}, {adult: [], minor: []})
+
+console.log(usersSorted)
