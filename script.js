@@ -1,113 +1,36 @@
-const users = [
-  { name: "Ivan", age: 18 },
-  { name: "Anna", age: 25 },
-  { name: "Oleg", age: 30 },
-  { name: "Olena", age: 22 },
-  { name: "Dmytro", age: 27 }
-];
+// 1. const a = [1, 1, 2, 3, 3, 7];
+// тільки повторювані [1, 3]
 
-const newUsers = [...users];
+const a = [1, 1, 2, 3, 3, 7];
+const b = new Set(a);
 
-function randomUserFunc(newUsers){
-  if(newUsers.length === 0) return null;
+// Функція, що приймає масив, і перевіряє, чи всі елементи унікальні
 
-  const randomIndex = Math.floor(Math.random() * newUsers.length);
-  const user = newUsers[randomIndex];
-
-  newUsers.splice(randomIndex, 1);
-
-  return user;
+function isElsUnique(arr){
+  return new Set(arr).size === arr.length 
 }
 
-// console.log(randomUserFunc(newUsers))
-// console.log(randomUserFunc(newUsers))
-// console.log(randomUserFunc(newUsers))
-// console.log(randomUserFunc(newUsers))
-// console.log(randomUserFunc(newUsers))
-// console.log(randomUserFunc(newUsers)) // null
+const arr1 = [1, 3, 4, 5]
+
+console.log(isElsUnique(arr1))
 
 
-// 2. sort()
-// відсортувати users по імені
+// const arr = [1, 2, 2, 3, 4, 4, 5]; тільки елементи, що повторюються 1 раз => [1, 3, 5]
 
-users.sort((a, b) => {
-  if(a.name > b.name) return 1
-  else if(a.name < b.name) return -1
-  else return 0;
-})
+const arr = [1, 2, 2, 3, 4, 4, 5];
+const set = new Set(arr)
 
-// 3. split/join()
-// const str = "2026-03-18";
-// отримати 
-// 18.03.2026
+const result = Array.from(set).filter(el => {
+  return arr.indexOf(el) === arr.lastIndexOf(el);
+});
 
-const str = "2026-03-18";
-
-str.split('-').reverse().join('.');
-
-// 4. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-// всі букви 'o' замініть на $$$
-
-const str1 = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s";
-
-const splitedStr = str1.split('');
-
-for(let i = 0; i < splitedStr.length; i++){
-  if(splitedStr[i] === 'o'){
-    splitedStr[i] = '$$$';
-  }
-}
-
-splitedStr.join('')
+console.log(result);
 
 
-// 5. reduce()
-// const numbers = [5, 10, 15, 20];
-// Обчислити суму непарних елементів
+const set1 = new Set();
+set.add([1,2]);
+set.add([1,2]);
+console.log(set1)
+console.log(set1.size === 1);
 
-const numbers = [5, 10, 15, 20];
-
-const sum = numbers.reduce((acc, a) => a % 2 !== 0 ? acc + a : acc)
-
-
-
-// **6. reduce()
-// const users = [
-// { name: "Ivan", age: 18 },
-// { name: "Anna", age: 25 },
-// { name: "Oleg", age: 30 },
-// { name: "Olena", age: 22 },
-// { name: "Petro", age: 17 }
-// ];
-
-// редьюсом отримайте
-// {
-// adult: [
-//  { name: "Ivan", age: 18 },
-//  { name: "Anna", age: 25 },
-//  { name: "Oleg", age: 30 },
-//  { name: "Olena", age: 22 }
-// ],
-// minor: [
-//  { name: "Petro", age: 17 }
-// ]
-// }
-
-const users2 = [
-  { name: "Ivan", age: 18 },
-  { name: "Anna", age: 25 },
-  { name: "Oleg", age: 30 },
-  { name: "Olena", age: 22 },
-  { name: "Petro", age: 17 }
-];
-
-const usersSorted = users2.reduce((sum, user) => {
-  if(user.age < 18){
-    sum.minor.push(user);
-  }else{
-    sum.adult.push(user);
-  }
-  return sum;
-}, {adult: [], minor: []})
-
-console.log(usersSorted)
+// false, бо Set порівнює не значення, а посилання, тому додає обидва масива
