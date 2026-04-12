@@ -1,96 +1,132 @@
-// 1. const a = [1, 1, 2, 3, 3, 7];
-// тільки повторювані [1, 3]
+// 1. напишіть аналог(поліфіл) через for (функція) indexOf та lastIndexOf()
 
-const a = [1, 1, 2, 3, 3, 7];
-const b = new Set(a);
+const arr1 = [1, 2, 3, 5, 3, 7, 9];
 
-// Функція, що приймає масив, і перевіряє, чи всі елементи унікальні
-
-function isElsUnique(arr){
-  return new Set(arr).size === arr.length 
+function indexOf(arr, inputNumber){
+  for(let i = 0; i < arr.length; i++){
+    if(arr[i] === inputNumber){
+      return i
+    }
+  }
+  return -1;
 }
 
-const arr1 = [1, 3, 4, 5]
-
-console.log(isElsUnique(arr1))
-
-
-// const arr = [1, 2, 2, 3, 4, 4, 5]; тільки елементи, що повторюються 1 раз => [1, 3, 5]
-
-const arr = [1, 2, 2, 3, 4, 4, 5];
-const set = new Set(arr)
-
-const result = Array.from(set).filter(el => {
-  return arr.indexOf(el) === arr.lastIndexOf(el);
-});
-
-console.log(result);
-
-
-const set1 = new Set();
-set.add([1,2]);
-set.add([1,2]);
-console.log(set1)
-console.log(set1.size === 1);
-
-// false, бо Set порівнює не значення, а посилання, тому додає обидва масива
-
-
-// 1. Запитайте n
-// Створіть масив з n натуральних елементів від 1 до 10
-// reduce його. в результаті отримаємо 
-// {
-// odd: 2, 
-// even: 8
-// }
-
-
-const n = Number(prompt("Введіть кількість елементів"));
-
-const arr2 = Array.from({ length: n }, () => Math.floor(Math.random() * 10) + 1);
-
-console.log("Масив:", arr);
-
-const result1 = arr.reduce((acc, num) => {
-  if (num % 2 === 0) {
-    acc.even++;
-  } else {
-    acc.odd++;
+function lastIndexOf(arr, inputNumber){
+  for(let i = arr.length; i >= 0; i--){
+    if(arr[i] === inputNumber){
+      return i
+    }
   }
-  return acc;
-}, { odd: 0, even: 0 });
+  return -1;
+}
 
-console.log(result1);
 
-// 2.
-// const users = [
-//   { login: "user_1", age: 12 },
-//   { login: "devMax", age: 19 },
-//   { login: "codeMaster", age: 17 },
-//   { login: "frontend_guy", age: 22 },
-//   { login: "backend_pro", age: 16 },
-//   { login: "jsNinja", age: 27 },
-//   { login: "reactFan", age: 14 },
-//   { login: "nodeHero", age: 31 },
-//   { login: "fullstack_dev", age: 18 },
-//   { login: "testerQA", age: 15 }
-// ];
-//       - додайте всім по 1 року (дослідити)
-//       - створіть масив reduce з логінів повнолітніх
+// 2. напишіть функцію, що порівнює масиви
 
-// const n = Number(prompt("Введіть кількість елементів"));
+const arr2 = [1, 2, 3, 5, 3, 7, 9];
+const arr3 = [1, 2, 3, 5, 3, 4, 7];
 
-// const arr = Array.from({ length: n }, () => Math.floor(Math.random() * 10) + 1);
+function compareArrs(arr1, arr2){
+  arr1.sort((a, b) => a - b);
+  arr2.sort((a, b) => a - b);
+  if(arr1.length !== arr2.length) return false;
+  for(let i = 0; i < arr1.length; i++){
+    if(arr1[i] !== arr2[i]){
+      return false;
+    }
+  }
+  return true;
+}
 
-// console.log("Масив:", arr);
+// 3. напишіть функцію, що порівнює об'єкти ()***
+// ремарка, в об'єктах та масивах примітиви !!!
 
-// const result = arr.reduce((acc, num) => {
-//   if (num % 2 === 0) {
-//     acc.even++;
-//   } else {
-//     acc.odd++;
-//   }
-//   return acc;
-// }, { odd: 0, even: 0 });
+let user1 = {
+  name: "dfghj",
+  age: 45,
+};
 
-// console.log(result);
+let user2 = {
+  name: "dfghj",
+  age: 45,
+};
+
+function compareObjs(obj1, obj2){
+  const entries1 = Object.entries(obj1).sort();
+  const entries2 = Object.entries(obj2).sort();
+
+  if(entries1.length !== entries2.length) return false;
+  for(let i = 0; i < Object.entries(obj1).length; i++){
+    if(entries1[i][1] !== entries2[i][1]) return false;
+    // if(Array.isArray(entries1[i][1]) && Array.isArray(entries2[i][1])){
+    //   if(!compareArrs(entries1[i][1], entries2[i][1])) return false;
+    // }
+  }
+
+  return true;
+}
+
+// console.log(compareObjs(user1, user2))
+
+
+// 4.const grades = {
+//   math: [10, 9, 11, 10],
+//   ukrainian: [11, 10, 12, 11],
+//   english: [9, 8, 10, 9],
+//   history: [8, 7, 9, 8],
+//   physics: [10, 9, 10, 11],
+//   chemistry: [7, 6, 8, 7],
+//   biology: [9, 8, 10, 9],
+//   geography: [8, 7, 9, 8],
+//   informatics: [12, 11, 12, 12],
+//   pe: [11, 10, 12, 11]
+// };
+
+// 4.1 Створіть новий об'єкт, де кожний предмет - це середнє всіх оцінок по ньому. округліть до десятих тільки
+// 4.2 через body.
+
+const grades = {
+  math: [10, 9, 11, 10],
+  ukrainian: [11, 10, 12, 11],
+  english: [9, 8, 10, 9],
+  history: [8, 7, 9, 8],
+  physics: [10, 9, 10, 11],
+  chemistry: [7, 6, 8, 7],
+  biology: [9, 8, 10, 9],
+  geography: [8, 7, 9, 8],
+  informatics: [12, 11, 12, 12],
+  pe: [11, 10, 12, 11]
+};
+
+const averageGrades = {}
+const objEntries= Object.entries(grades);
+const objKeys = Object.keys(grades);
+const objValues = Object.values(grades);
+
+for(let i = 0; i < objEntries.length; i++){
+  let average = Math.round((objValues[i].reduce((average, el) => average + el) / objValues[i].length) * 10) / 10;
+  averageGrades[objKeys[i]] = average; 
+}
+
+const averageGradeskeys = Object.keys(averageGrades);
+const averageGradesEntries = Object.entries(averageGrades);
+
+const p1 = document.querySelector('.para');
+
+for(let i = 0; i < averageGradeskeys.length; i++){
+  p1.insertAdjacentHTML(
+    'beforeend',
+    `<p><u>${averageGradeskeys[i]}</u>: <b>${averageGrades[averageGradeskeys[i]]}</b></p>`
+  )
+}
+
+for(let [subject, mark] of averageGradesEntries){
+  p1.insertAdjacentHTML(
+    'beforeend',
+    `<p><u>${subject}</u> -> <b>${mark}</b></p>`
+  )
+}
+
+// insertAdjacentHTML('beforeend', 'тут створіть параграф')
+// виведіть параграфи, де назва предмету підкреслена, середня оцінка жирним
+// двома способами через кейз і через ентріз
