@@ -1,132 +1,170 @@
-// 1. напишіть аналог(поліфіл) через for (функція) indexOf та lastIndexOf()
+// 1. const arr = [5, 10, 15];
+// Отримай через деструктуризацію змінні first і second.
 
-const arr1 = [1, 2, 3, 5, 3, 7, 9];
+const arr = [5, 10, 15];
 
-function indexOf(arr, inputNumber){
-  for(let i = 0; i < arr.length; i++){
-    if(arr[i] === inputNumber){
-      return i
-    }
-  }
-  return -1;
-}
+[first, second] = arr;
 
-function lastIndexOf(arr, inputNumber){
-  for(let i = arr.length; i >= 0; i--){
-    if(arr[i] === inputNumber){
-      return i
-    }
-  }
-  return -1;
-}
+// 2. Є об’єкт:
+// const user = {
+//   name: "Ivan",
+//   age: 25
+// };
+// Дістань name в змінну userName.
 
-
-// 2. напишіть функцію, що порівнює масиви
-
-const arr2 = [1, 2, 3, 5, 3, 7, 9];
-const arr3 = [1, 2, 3, 5, 3, 4, 7];
-
-function compareArrs(arr1, arr2){
-  arr1.sort((a, b) => a - b);
-  arr2.sort((a, b) => a - b);
-  if(arr1.length !== arr2.length) return false;
-  for(let i = 0; i < arr1.length; i++){
-    if(arr1[i] !== arr2[i]){
-      return false;
-    }
-  }
-  return true;
-}
-
-// 3. напишіть функцію, що порівнює об'єкти ()***
-// ремарка, в об'єктах та масивах примітиви !!!
-
-let user1 = {
-  name: "dfghj",
-  age: 45,
+const user = {
+  name: "Ivan",
+  age: 25
 };
 
-let user2 = {
-  name: "dfghj",
-  age: 45,
-};
+let {name: userName} = user;
 
-function compareObjs(obj1, obj2){
-  const entries1 = Object.entries(obj1).sort();
-  const entries2 = Object.entries(obj2).sort();
+// 3. Є масив:
+// const arr = [1, 2, 3, 4];
 
-  if(entries1.length !== entries2.length) return false;
-  for(let i = 0; i < Object.entries(obj1).length; i++){
-    if(entries1[i][1] !== entries2[i][1]) return false;
-    // if(Array.isArray(entries1[i][1]) && Array.isArray(entries2[i][1])){
-    //   if(!compareArrs(entries1[i][1], entries2[i][1])) return false;
-    // }
-  }
+// Отримай:
 
-  return true;
-}
+// first — перший елемент
+// others — масив з решти елементів
 
-// console.log(compareObjs(user1, user2))
+const arr1 = [1, 2, 3, 4];
+
+[first, ...others] = arr1;
 
 
-// 4.const grades = {
-//   math: [10, 9, 11, 10],
-//   ukrainian: [11, 10, 12, 11],
-//   english: [9, 8, 10, 9],
-//   history: [8, 7, 9, 8],
-//   physics: [10, 9, 10, 11],
-//   chemistry: [7, 6, 8, 7],
-//   biology: [9, 8, 10, 9],
-//   geography: [8, 7, 9, 8],
-//   informatics: [12, 11, 12, 12],
-//   pe: [11, 10, 12, 11]
+// 4. Є об’єкт:
+// const user = {
+//   name: "Ivan",
+//   age: 25,
+//   city: "Dnipro"
 // };
 
-// 4.1 Створіть новий об'єкт, де кожний предмет - це середнє всіх оцінок по ньому. округліть до десятих тільки
-// 4.2 через body.
+// Отримай:
+// змінну name
+// об’єкт rest (всі інші властивості без name)
 
-const grades = {
-  math: [10, 9, 11, 10],
-  ukrainian: [11, 10, 12, 11],
-  english: [9, 8, 10, 9],
-  history: [8, 7, 9, 8],
-  physics: [10, 9, 10, 11],
-  chemistry: [7, 6, 8, 7],
-  biology: [9, 8, 10, 9],
-  geography: [8, 7, 9, 8],
-  informatics: [12, 11, 12, 12],
-  pe: [11, 10, 12, 11]
+const user1 = {
+  name: "Ivan",
+  age: 25,
+  city: "Dnipro"
 };
 
-const averageGrades = {}
-const objEntries= Object.entries(grades);
-const objKeys = Object.keys(grades);
-const objValues = Object.values(grades);
+let {name, ...restUser} = user1;
 
-for(let i = 0; i < objEntries.length; i++){
-  let average = Math.round((objValues[i].reduce((average, el) => average + el) / objValues[i].length) * 10) / 10;
-  averageGrades[objKeys[i]] = average; 
+// 5. Є масиви:
+// const a = [1, 2];
+// const b = [3, 4];
+
+// Об’єднай їх в один масив [1, 2, 3, 4].
+
+const a = [1, 2];
+const b = [3, 4];
+
+const newArr = [...a, ...b];
+
+
+// 6. Є об’єкт:
+// const user = { name: "Ivan" };
+// Створи копію об’єкта (не посилання).
+
+const user2 = {name: "Ivan"};
+const newUser = {...user2}
+
+// 7. Є об’єкт:
+// const user = {
+//   name: "Ivan",
+//   age: 25,
+//   city: "Dnipro"
+// };
+
+// Створи новий об’єкт:
+// без city
+// додай country: "Ukraine"
+
+const user3 = {
+  name3: "Ivan",
+  age3: 25,
+  city: "Dnipro"
+};
+
+let {city, ...rest} = user3;
+
+const newUser1 = {
+  ...rest,
+  country: "Ukraine"
 }
 
-const averageGradeskeys = Object.keys(averageGrades);
-const averageGradesEntries = Object.entries(averageGrades);
 
-const p1 = document.querySelector('.para');
+// 8. Є масив:
+// const arr = [1, 2, 3];
 
-for(let i = 0; i < averageGradeskeys.length; i++){
-  p1.insertAdjacentHTML(
-    'beforeend',
-    `<p><u>${averageGradeskeys[i]}</u>: <b>${averageGrades[averageGradeskeys[i]]}</b></p>`
-  )
+// Створи новий масив:
+// додай 0 на початок
+// додай 4 в кінець
+
+const arr3 = [1, 2, 3];
+const newArr2 = [0, ...arr, 4];
+
+// 9. Є об’єкт:
+// const user = {
+//   name: "Ivan",
+//   address: {
+//     city: "Dnipro"
+//   }
+// };
+// Дістань значення city через деструктуризацію.
+
+const user4 = {
+  name: "Ivan",
+  address: {
+    city: "Dnipro"
+  }
+};
+
+const {address: { city: userCity }} = user4
+
+// 10. Є код:
+// const a = [1, 2, 3];
+// const b = a;
+
+// Зроби так, щоб b була копією масиву, а не посиланням.
+
+const a1 = [1, 2, 3];
+const b1 = [...a1];
+
+// 11. Є об’єкт:
+// const user = {
+//   name: "Ivan",
+//   age: 25
+// };
+
+// Напиши функцію:
+// function updateUser(user) {
+  // додати isAdmin: true
+// }
+// Не змінюй оригінальний об’єкт.
+
+const user5 = {
+  name: "Ivan",
+  age: 25
+};
+
+function updateUser(user){
+  const newUser = {
+    ...user,
+    isAdmin: true
+  }
+
+  return newUser
 }
 
-for(let [subject, mark] of averageGradesEntries){
-  p1.insertAdjacentHTML(
-    'beforeend',
-    `<p><u>${subject}</u> -> <b>${mark}</b></p>`
-  )
-}
+// 12. Є масив:
+// const arr = [1, 2, 3, 4, 5];
+// Через деструктуризацію отримай:
+// перший елемент
+// останній елемент
 
-// insertAdjacentHTML('beforeend', 'тут створіть параграф')
-// виведіть параграфи, де назва предмету підкреслена, середня оцінка жирним
-// двома способами через кейз і через ентріз
+const arr5 = [1, 2, 3, 4, 5];
+const [first2, ...rest2] = arr5;
+const [first3, , , , last2] = arr5
+const last = rest2[rest2.length - 1]
