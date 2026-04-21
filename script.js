@@ -1,33 +1,30 @@
-// 3. Написати функцію, що приймає дату в ISO та повертає який це день тижня
+const field = document.querySelector('.field');
+const square = document.querySelector('.square')
 
-const days = ['Нд', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
+let interval = false;
+let step = 0
 
-function receiveDayOfWeek(date){
-  const dateISO = new Date(date);
-  const index = dateISO.getDay();
-  return days[index];
-}
+field.addEventListener('mouseenter', () => {
+  interval = setInterval(() => {
+    if(step === 0){
+      square.style.transform = 'translate(400px, 0)';
+    }else if(step === 1){
+      square.style.transform = 'translate(400px, 400px)';
+    }else if(step === 2){
+      square.style.transform = 'translate(0, 400px)';
+    }else if(step === 3){
+      square.style.transform = 'translate(0, 0)';
+    } 
 
-// 2. Написати функцію, що виводить вік людини. в неї передаємо ISOчас
-// 2.1* 3 роки, 7 років, 21 рік ....
+    step++;
 
-const testISO = "2009-03-12T10:00:00.000Z";
+    if(step > 3){
+      step = 0;
+    };
 
-function ageFromISO(dateISO2){
-  const dateObject = new Date(dateISO2);
-  const dateNow = new Date();
+  }, 1000);
+})
 
-  let age = dateNow.getFullYear() - dateObject.getFullYear();
-
-  if (dateNow.getMonth() < dateObject.getMonth() || (dateNow.getMonth() === dateObject.getMonth() && dateNow.getDate() < dateObject.getDate())
-  ) {
-    age--;
-  }
-
-  return age;
-}
-
-console.log(ageFromISO(testISO))
-
-// У вас номер білету з 6 цифр. Виведіть всі щасливі, порахуйте їх кількість та скажіть, з якою ймовірністю нам випаде щасливий квиток (кількість щасливих / заг кількість)
-
+field.addEventListener('mouseleave', () => {
+  clearInterval(interval);
+})
